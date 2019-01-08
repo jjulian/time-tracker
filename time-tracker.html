@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<body>
+    <form>
+        <div class="task-rows">
+        </div>
+        <div class="form-row">
+            <button type="button" class="add-new-task btn btn-secondary">Add New Task</button>
+        </div>
+    </form>
+</body>
+
+<script>
+    function addNewTask() {
+        const id = Math.floor(Math.random() * Math.floor(1000000));
+        const rowTemplate =
+            `
+            <div class="form-inline" id="row-${id}">
+            <label for="taskName-${id}">Task Name</label>
+            <input type="text" class="form-control" id="taskName-${id}" placeholder="Enter task name">
+            <label for="taskStart-${id}">Start</label>
+            <input type="text" class="form-control" id="taskStart-${id}">
+            <label for="taskEnd-${id}">End</label>
+            <input type="text" class="form-control" id="taskEnd-${id}">
+            <button type="button" class="timer-toggle btn btn-primary">Start</button>
+            </div>
+        `;
+        const newRow = document.createElement("div");
+        newRow.innerHTML = rowTemplate;
+        document.querySelector(".task-rows").appendChild(newRow);
+        let toggleButton = newRow.querySelector("button.timer-toggle");
+        toggleButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("toggle!", e);
+        });
+    }
+
+    let addButton = document.querySelector("button.add-new-task");
+    addButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        addNewTask();
+    });
+    addNewTask();
+</script>
+
+</html>
